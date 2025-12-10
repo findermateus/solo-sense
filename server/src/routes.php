@@ -15,4 +15,5 @@ $app->get('/', function (RequestInterface $request, ResponseInterface $response,
 $app->group('/humidity', function (RouteCollectorProxy $app) {
     $app->get('', HumidityController::class . ':getHumidityHistory');
     $app->post('/{humidityValue}', HumidityController::class . ':saveHumidity');
+    $app->delete('', HumidityController::class . ':clearHumidityHistory');
 });

@@ -12,4 +12,6 @@ interface HumidityDAOInterface
      * @return HumidityDTO[]
      */
     public function getAllHumidity(): array;
+
+    public function clearHumidityHistory(): void;
 }
