@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 
 interface HumidityData {
     id: number;
@@ -73,6 +73,12 @@ function App() {
 
     useEffect(() => {
         fetchHumidityData();
+
+        const interval = setInterval(() => {
+            fetchHumidityData();
+        }, 2000);
+
+        return () => clearInterval(interval);
     }, []);
 
     const currentReading = humidityData[0];
@@ -93,9 +99,9 @@ function App() {
                         disabled={loading}
                         className="flex items-center gap-2 bg-agro-green-600 hover:bg-agro-green-700 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
                     >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                         {loading ? 'Carregando...' : 'Atualizar'}
                     </button>
@@ -106,7 +112,7 @@ function App() {
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
                         Limpar Histórico
                     </button>
@@ -117,8 +123,8 @@ function App() {
                         <div className="flex items-center">
                             <svg className="w-5 h-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd"
-                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                      clipRule="evenodd"/>
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                    clipRule="evenodd" />
                             </svg>
                             <p className="text-red-700 font-medium">Erro: {error}</p>
                         </div>
@@ -132,7 +138,7 @@ function App() {
                                 <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                              d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
                                     Status Atual
                                 </h2>
@@ -169,7 +175,7 @@ function App() {
                         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Histórico de Dados
                         </h2>
@@ -178,9 +184,9 @@ function App() {
                         {humidityData.length === 0 && !loading ? (
                             <div className="text-center py-12">
                                 <svg className="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor"
-                                     viewBox="0 0 24 24">
+                                    viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
-                                          d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                 </svg>
                                 <p className="text-gray-500 text-lg">Nenhum dado de umidade disponível</p>
                                 <p className="text-gray-400 text-sm mt-2">Os dados aparecerão aqui quando houver
@@ -191,21 +197,18 @@ function App() {
                                 {humidityData.map((reading, index) => (
                                     <div
                                         key={reading.id}
-                                        className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${
-                                            index === 0
-                                                ? 'border-agro-green-200 bg-agro-green-50'
-                                                : 'border-gray-200 bg-gray-50 hover:bg-gray-100'
-                                        }`}
+                                        className={`p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md ${index === 0
+                                            ? 'border-agro-green-200 bg-agro-green-50'
+                                            : 'border-gray-200 bg-gray-50 hover:bg-gray-100'
+                                            }`}
                                     >
                                         <div className="flex flex-wrap items-center justify-between gap-4">
                                             <div className="flex items-center gap-3">
-                                                <div className={`w-3 h-3 rounded-full ${
-                                                    index === 0 ? 'bg-agro-green-500' : 'bg-gray-400'
-                                                }`}></div>
+                                                <div className={`w-3 h-3 rounded-full ${index === 0 ? 'bg-agro-green-500' : 'bg-gray-400'
+                                                    }`}></div>
                                                 <div>
-                                                    <div className={`font-semibold text-lg ${
-                                                        index === 0 ? 'text-agro-green-800' : 'text-gray-700'
-                                                    }`}>
+                                                    <div className={`font-semibold text-lg ${index === 0 ? 'text-agro-green-800' : 'text-gray-700'
+                                                        }`}>
                                                         {getStatusLabel(reading.status)}
                                                     </div>
                                                     <div className="text-sm text-gray-500">
@@ -214,9 +217,8 @@ function App() {
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <div className={`text-sm font-medium ${
-                                                    index === 0 ? 'text-agro-green-600' : 'text-gray-600'
-                                                }`}>
+                                                <div className={`text-sm font-medium ${index === 0 ? 'text-agro-green-600' : 'text-gray-600'
+                                                    }`}>
                                                     {formatDate(reading.analyzedAt)}
                                                 </div>
                                                 {index === 0 && (
