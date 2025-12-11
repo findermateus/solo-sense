@@ -16,6 +16,7 @@ const HUMIDITY_LABELS = {
 };
 
 function App() {
+    const API_URL = import.meta.env.VITE_API_URL;
     const [humidityData, setHumidityData] = useState<HumidityData[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,7 @@ function App() {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:80/humidity');
+            const response = await fetch(`${API_URL}/humidity`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -56,7 +57,7 @@ function App() {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:80/humidity', {
+            const response = await fetch(`${API_URL}/humidity`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
