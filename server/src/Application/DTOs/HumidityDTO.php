@@ -8,7 +8,7 @@ use JsonSerializable;
 class HumidityDTO implements JsonSerializable
 {
     private const HUMIDITY_STATUS = [
-        'inAir' => [850, 1023],
+        'inAir' => [850, 1024],
         'drySoil' => [700, 850],
         'slightlyMoist' => [500, 700],
         'moist' => [300, 500],
