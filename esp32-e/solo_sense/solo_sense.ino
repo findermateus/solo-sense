@@ -28,7 +28,7 @@ void sendHumidity(int rawValue) {
   WiFiClient client;
   HTTPClient http;
 
-  String url = "http://solosense.zumbizus.com:8080/humidity/" + String(rawValue);
+  String url = "http://SEU_SERVIDOR:8080/humidity/" + String(rawValue);
   String apiToken = "your_api_token";
 
   http.begin(client, url);
