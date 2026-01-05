@@ -1,4 +1,4 @@
-# 🌱 Solo Sense - Sistema de Monitoramento de Umidade do Solo
+# Solo Sense - Sistema de Monitoramento de Umidade do Solo
 
 Sistema completo de monitoramento de umidade do solo utilizando ESP32, servidor PHP (Slim Framework) e interface web em React. O projeto permite a leitura automática de umidade através de sensores, armazenamento de dados históricos e visualização em tempo real.
 
@@ -23,7 +23,7 @@ O **Solo Sense** é um sistema IoT para monitoramento de umidade do solo que int
 
 O sistema coleta dados de umidade do solo através de sensores conectados ao ESP32, envia para uma API REST que armazena os dados em um banco MySQL, e apresenta as informações em uma interface web intuitiva.
 
-##️ Arquitetura
+# Arquitetura
 
 ```
 ┌─────────────┐         ┌──────────────┐         ┌─────────────┐
@@ -33,7 +33,7 @@ O sistema coleta dados de umidade do solo através de sensores conectados ao ESP
 └─────────────┘         └──────────────┘         └─────────────┘
 ```
 
-##️ Tecnologias Utilizadas
+# Tecnologias Utilizadas
 
 ### Backend (Server)
 - **PHP** com Slim Framework 4
@@ -113,7 +113,7 @@ agro-sense-server/
    API_TOKEN=your_api_token
    ```
    
-   > ⚠️ **Importante**: `DB_HOST=db` corresponde ao nome do container MySQL no docker-compose. Altere `API_TOKEN` para um valor seguro.
+   >  **Importante**: `DB_HOST=db` corresponde ao nome do container MySQL no docker-compose. Altere `API_TOKEN` para um valor seguro.
 
 3. **Inicie os containers Docker:**
    ```bash
@@ -171,7 +171,7 @@ O servidor estará disponível em `http://localhost:8080`
    VITE_API_TOKEN=your_api_token
    ```
    
-   > ⚠️ **Importante**: O `VITE_API_TOKEN` deve ser o mesmo valor configurado no servidor.
+   >  **Importante**: O `VITE_API_TOKEN` deve ser o mesmo valor configurado no servidor.
 
 4. **Inicie o servidor de desenvolvimento:**
    ```bash
@@ -226,7 +226,7 @@ Os arquivos otimizados estarão na pasta `dist/`.
    String apiToken = "your_api_token";
    ```
    
-   > ⚠️ Substitua `SEU_SERVIDOR` pelo IP ou domínio onde o servidor está rodando e use o mesmo `API_TOKEN` configurado no servidor.
+   >  Substitua `SEU_SERVIDOR` pelo IP ou domínio onde o servidor está rodando e use o mesmo `API_TOKEN` configurado no servidor.
 
 4. **Compile e faça upload para o ESP32:**
    - Selecione a placa correta (ESP8266/ESP32)
@@ -253,21 +253,4 @@ A interface oferece três funcionalidades principais:
 2. Envia o valor via HTTP POST para o servidor
 3. O servidor armazena no banco MySQL
 4. O cliente consulta e exibe os dados em tempo real
-
-## Troubleshooting
-
-### ESP32 não conecta ao WiFi
-- Verifique as credenciais WiFi
-- Certifique-se que a rede é 2.4GHz (ESP8266 não suporta 5GHz)
-- Verifique o Serial Monitor para mensagens de erro
-
-### Cliente não se conecta ao servidor
-- Verifique se `VITE_API_URL` está correto no `.env`
-- Certifique-se que o servidor está acessível
-- Verifique se o `API_TOKEN` é o mesmo em cliente e servidor
-
-### Erro nas migrations
-- Certifique-se que o container MySQL está rodando
-- Aguarde alguns segundos após o `docker-compose up` antes de rodar as migrations
-- Verifique os logs do MySQL: `docker logs mysql`
 
